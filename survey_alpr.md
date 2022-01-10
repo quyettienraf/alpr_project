@@ -4,8 +4,17 @@
 - số lượng sao: 43 stars 
 - lần cập nhật gần nhất: 29/01/2021
 - demo: 
+<div align='center'>
+  <img src="./img/ocr_result.gif" width="60%">
+</div>
+<div align='center'>
+  <img src="./img/ocr_result2.gif" width="60%">
+</div>
 	
 - sơ đồ 
+<div align='center'>
+  <img src="./img/from-colab-to-jetson.png" width="60%">
+</div>
 
 - thiết bị : NVIDIA® Jetson Nano™ Developer Kit
 - dataset: 
