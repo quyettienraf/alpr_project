@@ -31,3 +31,29 @@ Các tiêu chí được dùng để đánh giá:
   <img src="./img/8-2-300x169.png" width="60%">
 </div>
 – Đối tượng không được nhận dạng (False negative: FN)
+### Precision và Recall 
+Dự đoán (Precision) đo lường mức độ chính xác là dự đoán của mô hình tức là tỷ lệ phần trăm dự đoán của mô hình là chính xác.
+“Recall” đo lường như thế nào tốt mô hình tìm thấy tất cả các mẫu tích cực. Ví dụ: chúng ta có thể tìm thấy 80% các trường hợp tích cực có thể có trong các dự đoán K hàng đầu của mô hình.
+Mô tả toán học của precision và recall
+<div align='center'>
+  <img src="./img/3-2_recall.png" width="60%">
+</div>
+### AP và mAP
+Từ precision và recall đã được định nghĩa ở trên chúng ta cũng có thể đánh giá mô hình dựa trên việc thay đổi một ngưỡng và quan sát giá trị của Precision và Recall. Khái niệm Area Under the Curve (AUC) cũng được định nghĩa tương tự. Với Precision-Recall Curve, AUC còn có một tên khác là Average precision (AP).
+Giả sử có 𝑁 ngưỡng để tính precision và recall, với mỗi ngưỡng cho một cặp giá trị precision, recall là 𝑃𝑛,,=1,2,…,𝑁. Precision-Recall curve được vẽ bằng cách vẽ từng điểm có toạ độ (𝑃𝑛,) trên trục toạ độ và nối chúng với nhau. AP được xác định bằng:
+𝐴𝑃=∑(𝑅𝑛−𝑅𝑛−1)𝑃𝑛𝑛
+Và mAP là trung bình của AP được tính cho tất cả các lớp.
+## 2. Tính toán mAP cho các bài toán Object detection.
+### 2.1. Tổng quan các bước:
+- Bước 1: cài thư viện cần thiết để tính toán.
+- Bước 2: clone source code tính toán từ github.
+- Bước 3: chọn một số ảnh để tính toán( hoặc toàn bộ dataset nếu muốn độ chính xác cao).
+- Bước 4: tạo các file ground-truth ( file txt trong quá trình gán nhãn).
+- Bước 5: tạo file detection result (file txt được tạo ra bằng cách sử dụng file weights).
+- Bước 6: chạy code mẫu để tạo ra các biểu đồ AP và mAP như phía dưới 
+<div align='center'>
+  <img src="./img/6-2-300x225.png" width="60%">
+  Kết quả tính toán AP và mAP
+</div>
+
+
