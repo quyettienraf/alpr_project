@@ -8,7 +8,7 @@
   <img src="./img/ocr_result.gif" width="60%">
 </div>
 <div align='center'>
-  <img src="./img/ocr_result2.gif" width="60%">
+  <img src="./img/place_result2.gif" width="60%">
 </div>
 	
 - sơ đồ 
