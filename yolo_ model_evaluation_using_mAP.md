@@ -19,7 +19,7 @@ Dưới đây là ví dụ về đường bao thực và đường bao được 
 Tỷ lệ này là IoU (Intersection over union) là tỉ lệ giữa đo lường mức độ giao nhau giữa hai đường bao (thường là đường bao dự đoán và đường bao thực) để nhằm xác định hai khung hình có bị đè chồng lên nhau không.
 Tỷ lệ này được tính dựa trên phần diện tích giao nhau gữa 2 đường bao với phần tổng diện tích giao nhau và không giao nhau giữa chúng.
 <div align='center'>
-  <img src="./img/1_2_IOU_2.png" width="60%">
+  <img src="./img/2_1_IOU_2.png" width="60%">
 </div>
 Các tiêu chí được dùng để đánh giá:
 – Đối tượng được nhận dạng đúng với tỉ lệ IOU > 0.5 (True positive : TP)
