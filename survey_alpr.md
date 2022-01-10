@@ -7,8 +7,9 @@
 <div align='center'>
   <img src="./img/ocr_result.gif" width="60%">
 </div>
+- demo 2:
 <div align='center'>
-  <img src="./img/place_result2.gif" width="60%">
+  <img src="./img/plate_result2.gif" width="60%">
 </div>
 	
 - sơ đồ 
