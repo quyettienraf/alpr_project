@@ -51,9 +51,9 @@ Và mAP là trung bình của AP được tính cho tất cả các lớp.
 - Bước 4: tạo các file ground-truth ( file txt trong quá trình gán nhãn).
 - Bước 5: tạo file detection result (file txt được tạo ra bằng cách sử dụng file weights).
 - Bước 6: chạy code mẫu để tạo ra các biểu đồ AP và mAP như phía dưới 
+Kết quả tính toán AP và mAP
 <div align='center'>
   <img src="./img/6-2-300x225.png" width="60%">
-  Kết quả tính toán AP và mAP
 </div>
 
 
