@@ -43,6 +43,7 @@ Từ precision và recall đã được định nghĩa ở trên chúng ta cũng
 Giả sử có 𝑁 ngưỡng để tính precision và recall, với mỗi ngưỡng cho một cặp giá trị precision, recall là 𝑃𝑛,,=1,2,…,𝑁. Precision-Recall curve được vẽ bằng cách vẽ từng điểm có toạ độ (𝑃𝑛,) trên trục toạ độ và nối chúng với nhau. AP được xác định bằng:
 𝐴𝑃=∑(𝑅𝑛−𝑅𝑛−1)𝑃𝑛𝑛
 Và mAP là trung bình của AP được tính cho tất cả các lớp.
+
 ## 2. Tính toán mAP cho các bài toán Object detection.
 ### 2.1. Tổng quan các bước:
 - Bước 1: cài thư viện cần thiết để tính toán.
@@ -51,6 +52,7 @@ Và mAP là trung bình của AP được tính cho tất cả các lớp.
 - Bước 4: tạo các file ground-truth ( file txt trong quá trình gán nhãn).
 - Bước 5: tạo file detection result (file txt được tạo ra bằng cách sử dụng file weights).
 - Bước 6: chạy code mẫu để tạo ra các biểu đồ AP và mAP như phía dưới 
+
 Kết quả tính toán AP và mAP
 <div align='center'>
   <img src="./img/6-2-300x225.png" width="60%">
