@@ -81,3 +81,9 @@
 - đường link: https://ieeexplore.ieee.org/document/8573375 
 ## 3.4. Real-time License Plate Recognition in Overweight Vehicle Balance System
 - đường link: https://www.ijitee.org/wp-content/uploads/papers/v9i6/F3079049620.pdf
+
+# 4. Sơ đồ tổng quan (Overview Diagram)
+## 4.1. C1 Diagram
+<div align='center'>
+  <img src="./img/OverviewDiagramALPR.png" width="60%">
+</div>
