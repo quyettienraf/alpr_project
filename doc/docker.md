@@ -1,4 +1,4 @@
-#1. Image Docker sshd
+# 1. Image Docker sshd
 - link: https://hub.docker.com/r/rastasheep/ubuntu-sshd
 - Docker Pull Command: docker pull rastasheep/ubuntu-sshd
 - link github: https://github.com/rastasheep/ubuntu-sshd
@@ -13,7 +13,7 @@ $ ssh root@localhost -p 49154
 # The password is `root`
 root@test_sshd $
 ```
-## Install Package
+# 2. Install Package
 ```bash
 apt update
 apt upgrade
