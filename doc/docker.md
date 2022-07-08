@@ -29,3 +29,27 @@ apt-get install python3.9
 apt-get install python3-pip
 ```
 Then you can run python 3.9 with ```bash python3.9 ```
+# 3. Install anaconda 
+- Step 1:  Download Anaconda
+	Download file anaconda.sh from https://www.anaconda.com/products/distribution
+- Step 2: Copy file anaconda.sh inside container 
+- Step 3: Run the Script
+```bash
+bash Anaconda3-2020.07-Linux-x86_64.sh
+```
+- Step 4: Activate and Test Installation
+To activate the installation, type the following command:
+```bash
+source ~/.bashrc
+```
+To test the installation, type the conda command below:
+```bash
+conda list
+```
+- Step 5: Set Up Anaconda Environments
+```bash
+conda create --name yolov5 python=3
+```
+
+
+
