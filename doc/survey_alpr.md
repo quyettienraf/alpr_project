@@ -87,3 +87,8 @@
 <div align='center'>
   <img src="./img/OverviewDiagramALPR.png" width="60%">
 </div>
+## 4.2. Các thuật toán sử dụng 
+- Yolov3
+- Yolov4
+- Yolov5
+- Tesseract OCR
