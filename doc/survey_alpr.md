@@ -82,3 +82,16 @@
 ## 3.4. Real-time License Plate Recognition in Overweight Vehicle Balance System
 - đường link: https://www.ijitee.org/wp-content/uploads/papers/v9i6/F3079049620.pdf
 
+<<<<<<< HEAD:survey_alpr.md
+=======
+# 4. Sơ đồ tổng quan (Overview Diagram)
+## 4.1. C1 Diagram
+<div align='center'>
+  <img src="./img/OverviewDiagramALPR.png" width="60%">
+</div>
+## 4.2. Các thuật toán sử dụng 
+- Yolov3
+- Yolov4
+- Yolov5
+- Tesseract OCR
+>>>>>>> a8c698db194df2db9d7a5b72b66873805cfbbe62:doc/survey_alpr.md
