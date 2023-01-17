@@ -28,7 +28,7 @@ bước 3: nhận dạng kí tự trong vùng kí tự
 
 so sánh các phương pháp với nhau hoặc so sánh cái mình làm với cả những cái ngta làm
 
-Cải tiên thuật toán nhận dạng tình huốc khó trong dataset
+Cải tiên thuật toán nhận dạng tình huống khó trong dataset
 
 bài toán nhiều biển số trong 1 ảnh
 
