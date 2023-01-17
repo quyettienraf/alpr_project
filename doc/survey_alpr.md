@@ -82,13 +82,21 @@
 - đường link: https://ieeexplore.ieee.org/document/8573375 
 ## 3.4. Real-time License Plate Recognition in Overweight Vehicle Balance System
 - đường link: https://www.ijitee.org/wp-content/uploads/papers/v9i6/F3079049620.pdf
-# 4. Sơ đồ tổng quan (Overview Diagram)
-## 4.1. C1 Diagram
+
+# 4. Paper With Code
+## 4.1. A Robust Real-Time Automatic License Plate Recognition Based on the YOLO Detector
+- link: https://paperswithcode.com/paper/a-robust-real-time-automatic-license-plate
+
+## 4.2. License Plate Detection and Recognition in Unconstrained Scenarios
+- link: https://paperswithcode.com/paper/license-plate-detection-and-recognition-in
+
+# 5. Sơ đồ tổng quan (Overview Diagram)
+## 5.1. C1 Diagram
 <div align='center'>
   <img src="./img/OverviewDiagramALPR.png" width="60%">
 </div>
 
-## 4.2. Các thuật toán sử dụng 
+## 5.2. Các thuật toán sử dụng 
 - Yolov3
 - Yolov4
 - Yolov5
