@@ -5,8 +5,9 @@
 - lần cập nhật gần nhất: 29/01/2021
 - demo: 
 <div align='center'>
-  <img src="./img/ocr_result.gif" width="60%">
+  <img src="./img/ocr_result.gif" width="60%">	
 </div>
+
 - demo 2:
 <div align='center'>
   <img src="./img/plate_result2.gif" width="60%">
@@ -81,17 +82,16 @@
 - đường link: https://ieeexplore.ieee.org/document/8573375 
 ## 3.4. Real-time License Plate Recognition in Overweight Vehicle Balance System
 - đường link: https://www.ijitee.org/wp-content/uploads/papers/v9i6/F3079049620.pdf
-
-<<<<<<< HEAD:survey_alpr.md
-=======
 # 4. Sơ đồ tổng quan (Overview Diagram)
 ## 4.1. C1 Diagram
 <div align='center'>
   <img src="./img/OverviewDiagramALPR.png" width="60%">
 </div>
+
 ## 4.2. Các thuật toán sử dụng 
 - Yolov3
 - Yolov4
 - Yolov5
+- Yolov6
+- Yolov7
 - Tesseract OCR
->>>>>>> a8c698db194df2db9d7a5b72b66873805cfbbe62:doc/survey_alpr.md
