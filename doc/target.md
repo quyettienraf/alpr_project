@@ -1,8 +1,8 @@
-sơ đồ khối mô tả tổng quan
+sơ đồ khối mô tả tổng quan _ done
 
-ở mỗi bước thì lựa chọn thuật toán gì
+ở mỗi bước thì lựa chọn thuật toán gì _ done
 
-cài đặt và đánh giá dựa trên một số bộ dataset
+cài đặt và đánh giá dựa trên một số bộ dataset _ doing
 
 implement trên thiết bị raspberry pi
 
