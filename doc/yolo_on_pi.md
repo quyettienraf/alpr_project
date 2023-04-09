@@ -28,7 +28,6 @@ Vì vậy, trước khi bắt đầu cài đặt YOLO và nhận diện biển s
 # III. Viết Docker image và các thư viện liên quan
 - Hướng dẫn cách cài đặt Dokcer và các thư viện liên quan trên máy tính window
 - Hướng dẫn cách cài đặt dokcer trên raspberry pi
-- 
 
 Trong phần trước, chúng ta đã chuẩn bị các thiết bị và phần mềm cần thiết để cài đặt YOLO và nhận diện biển số xe trên Raspberry Pi.
 
