@@ -29,12 +29,15 @@ Vì vậy, trước khi bắt đầu cài đặt YOLO và nhận diện biển s
 
 - Mô hình YOLO (You Only Look Once) là một mô hình học sâu được sử dụng cho việc nhận diện đối tượng trong ảnh và video. Nó được thiết kế để nhận diện và phân loại các đối tượng đồng thời trong một khung hình. Mô hình YOLO sử dụng một mạng nơ-ron tích chập để xác định vị trí, kích thước và loại của các đối tượng trong ảnh và đưa ra các dự đoán trong thời gian thực. Với độ chính xác cao và khả năng xử lý nhanh, YOLO đã trở thành một trong những mô hình phổ biến nhất trong lĩnh vực nhận diện đối tượng.
 
+### Sự phát triển của YOLO
 - yolo xuất hiện từ năm 2015, đã phát triển qua nhất nhiều phiên bản, chúng ta có thể nhìn thấy các phiên bản như trên hình. 
 ![evolution-of-yolo-models-1024x576](https://user-images.githubusercontent.com/13607004/231107354-1303dbc2-9948-4e42-90a6-0386f37b7823.png)
   - YOLOv1: Phiên bản đầu tiên của mô hình YOLO, đó là YOLOv1 đã được xuất bản bởi Joseph Redmon et al. vào năm 2015. Đây là mô hình phát hiện đối tượng (SSD - single stage object detection) single stage đầu tiên đã tạo ra các mô hình SSD và tất cả các mô hình YOLO tiếp theo.
+  - YOLOv2: còn được gọi là YOLO 9000 được xuất bản bởi tác giả gốc của YOLOv1, Joseph Redmon. Nó đã cải thiện YOLOv1 bằng cách giới thiệu khái niệm anchor boxes và backbone tốt hơn, đó là Darknet-19.
+  - YOLOv3: Năm 2018, Joseph Redmon và Ali Farhadi đã xuất bản YOLOv3. Nó không phải là một bước nhảy vọt về kiến trúc mà là một báo cáo kỹ thuật, nhưng dù sao cũng là một cải tiến lớn trong gia đình YOLO. YOLOv3 sử dụng backbone Darknet-53, loại bỏ các kết nối dư thừa, pretrain tốt hơn và các kỹ thuật tăng cường hình ảnh để đem lại những cải tiến.
+  - Ultralytics YOLO Object Detection Models: Tất cả các mô hình phát hiện đối tượng YOLO cho đến YOLOv3 đều được viết bằng ngôn ngữ lập trình C và sử dụng framework Darknet. Những người mới học sẽ gặp khó khăn khi đọc code và tinh chỉnh các mô hình. Cùng khoảng thời gian với YOLOv3, Ultralytics đã phát hành mô hình YOLO (YOLOv3) đầu tiên được triển khai bằng framework PyTorch. Nó cũng dễ tiếp cận và dễ sử dụng hơn cho việc transfer learning. Ngay sau khi xuất bản YOLOv3, Joseph Redmon đã rời khỏi cộng đồng nghiên cứu Thị giác máy tính. YOLOv4 (của Alexey và cộng sự) là mô hình YOLO cuối cùng được viết trên Darknet. Sau đó đã có rất nhiều mô hình YOLO khác nhau. YOLOv4, YOLOX, PP-YOLO, YOLOv6 và YOLOv7 là một số mô hình nổi bật. Sau YOLOv3, Ultralytics cũng phát hành YOLOv5 thậm chí còn tốt hơn, nhanh hơn và dễ sử dụng hơn tất cả các mô hình YOLO khác. Tính đến thời điểm hiện tại (tháng 1 năm 2023), Ultralytics đã xuất bản YOLOv8 trong kho lưu trữ ultralytics, đây có lẽ là mô hình YOLO tốt nhất cho đến nay.
 
-
-- hiện nay yolo đã phát triển đến version 8, có 1 số tính năng chính như sau:
+- Trong YOLO version 8, có 1 số key features như sau:
   - user-friendly API (Command Line + Python): thay vì việc phải viết code python để thực hiện training, detect, với yolov8, bạn không cần phải thực hiện điều đó mà có thể thực hiện luôn trên dòng lệnh, chỉ cần import thư viện là xong
   - faster and more accurate
  Việc xử lý nhanh hơn và chính xác hơn
