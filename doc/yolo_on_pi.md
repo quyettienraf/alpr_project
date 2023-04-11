@@ -85,10 +85,10 @@ pip install ultralytics
 # 5. Nhận diện biển số xe
 - chuẩn hóa dữ liệu
 ```
-mkdir -p dataset/train/labels
-mkdir -p dataset/train/images
-mkdir -p dataset/val/labels
-mkdir -p dataset/val/images
+mkdir -p datasets/train/labels
+mkdir -p datasets/train/images
+mkdir -p datasets/val/labels
+mkdir -p datasets/val/images
 
 # copy image
 cp ./archive/images dataset/train/images
@@ -98,7 +98,17 @@ cp ./archive/images/Cars1*.png dataset/train/images
 cp ./dataset/train/labels/Cars1*.txt dataset/val/labels
 ```
 - tạo file .yaml
+```
+path:  datasets  # dataset root dir
+train: train/images  # train images 
+# val: val/images # val images 
+val:
+test:  # test images (optional)
 
+# Classes
+names:
+  0: plate
+```
 - Train model
 
 
