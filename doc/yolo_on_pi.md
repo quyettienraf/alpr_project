@@ -91,11 +91,11 @@ mkdir -p datasets/val/labels
 mkdir -p datasets/val/images
 
 # copy image
-cp ./archive/images dataset/train/images
-cp ./archive/images/Cars1*.png dataset/train/images
+cp ./archive/images datasets/train/images
+cp ./archive/images/Cars1*.png datasets/train/images
 
 #copy anotation
-cp ./dataset/train/labels/Cars1*.txt dataset/val/labels
+cp ./dataset/train/labels/Cars1*.txt datasets/val/labels
 ```
 - tạo file .yaml
 ```
