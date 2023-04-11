@@ -1,4 +1,4 @@
-# I. Giới thiệu chủ đề và mục tiêu của video
+# 1. Giới thiệu chủ đề và mục tiêu của video
 - Giới thiệu về việc cài đặt YOLO, Tesseract OCR và bài toán nhận diện biển số xe trên Raspberry Pi
 - Mục tiêu của video là giúp người xem có thể tự cài đặt và sử dụng YOLO và Tesseract OCR để nhận diện biển số xe trên Raspberry Pi
 
@@ -11,7 +11,7 @@ Mục tiêu của video này là giúp các bạn có thể tự cài đặt và
 Vì vậy, hãy cùng mình bắt đầu và tìm hiểu cách cài đặt YOLO và sử dụng nó để nhận diện biển số xe trên Raspberry Pi trong phần tiếp theo của video nhé!
 
 
-# II. Thông tin cần chuẩn bị trước khi bắt đầu
+# 2. Thông tin cần chuẩn bị trước khi bắt đầu
 - Giới thiệu về các thiết bị cần chuẩn bị (Raspberry Pi, camera, adapter,..)
 - Cài đặt Yolo trên máy tính và pi
 
@@ -21,10 +21,12 @@ Trước khi chúng ta bắt đầu cài đặt YOLO và nhận diện biển s�
 
 Vì vậy, trước khi bắt đầu cài đặt YOLO và nhận diện biển số xe trên Raspberry Pi, hãy đảm bảo rằng bạn đã chuẩn bị đầy đủ các thiết bị để tiếp tục với các bước tiếp theo trong video.
 
-# IV. Chuẩn bị video, hình ảnh biển số xe
+# 3. Chuẩn bị video, hình ảnh biển số xe
 - chuẩn bị hình ảnh và video test
+Bộ dữ liệu được lấy từ link: https://www.kaggle.com/datasets/andrewmvd/car-plate-detection gồm 443 ảnh biển số xe ô tô
+Video test được quay bằng điện thoại với định dạng .mp4
 
-# V. Giới thiệu YOLOv8
+# 4. Giới thiệu YOLOv8
 ## Giải thích cách YOLO hoạt động và các thông số quan trọng cần chú ý
 
 - Mô hình YOLO (You Only Look Once) là một mô hình học sâu được sử dụng cho việc nhận diện đối tượng trong ảnh và video. Nó được thiết kế để nhận diện và phân loại các đối tượng đồng thời trong một khung hình. Mô hình YOLO sử dụng một mạng nơ-ron tích chập để xác định vị trí, kích thước và loại của các đối tượng trong ảnh và đưa ra các dự đoán trong thời gian thực. Với độ chính xác cao và khả năng xử lý nhanh, YOLO đã trở thành một trong những mô hình phổ biến nhất trong lĩnh vực nhận diện đối tượng.
@@ -50,15 +52,22 @@ Vì vậy, trước khi bắt đầu cài đặt YOLO và nhận diện biển s
   - New Loss Function.
   - Flexible supporting numerous export formats (can run on CPUs & GPUs): hỗ trợ expor tmodel ra nhiều format khác nhau.
 
+- Pretrain Model
+Có năm mô hình trong mỗi danh mục mô hình YOLOv8 để detection, segmentation và classification. YOLOv8 Nano là nhanh nhất và nhỏ nhất, trong khi YOLOv8 Extra Large (YOLOv8x) là chính xác nhất nhưng chậm nhất.
+YOLOv8 đi kèm với các mô hình được đào tạo trước sau đây:
+	- Object Detection được đào tạo trên bộ dữ liệu COCO detection với độ phân giải hình ảnh là 640.
+	- Instance segmentation được đào tạo trên bộ dữ liệu COCO segmentation với độ phân giải hình ảnh là 640.
+	- Các mô hình Image classification được đào tạo trước trên bộ dữ liệu ImageNet với độ phân giải hình ảnh là 224.
+
 - Cài đặt YOLOv8
   + Cài trực tiếp
   + Cài bằng docker 
 
-- Pretrain Model
 
 
 
-# VI. Nhận diện biển số xe
+
+# 5. Nhận diện biển số xe
 - chuẩn hóa dữ liệu
 - tạo file .yaml
 - Train model
@@ -84,9 +93,9 @@ FPS = 1000 / (0.7 + 41.9 + 0.5) = 22.63
 
 Vậy, FPS của mô hình khi xử lý ảnh kích thước (1, 3, 640, 640) là khoảng 22.63, tức là mô hình có thể xử lý được 22.63 khung hình trong một giây.
 
-# VII. Kết luận
+# 6. Kết luận
 - Tóm tắt lại các bước cần thực hiện để cài đặt và sử dụng YOLO và Tesseract OCR trên Raspberry Pi để nhận diện biển số xe
 - Khuyến khích người xem thực hiện thử các bước này để có thể áp dụng vào các ứng dụng thực tế.
 
-# VII. Hướng dẫn bổ sung (nếu có)
+# 7. Hướng dẫn bổ sung (nếu có)
 - Nếu có, cung cấp các hướng dẫn bổ sung hoặc các tài liệu tham khảo để người xem có thể tìm hiểu thêm về chủ đề này.
