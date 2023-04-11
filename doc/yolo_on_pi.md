@@ -23,8 +23,8 @@ Vì vậy, trước khi bắt đầu cài đặt YOLO và nhận diện biển s
 
 # 3. Chuẩn bị video, hình ảnh biển số xe
 - chuẩn bị hình ảnh và video test
-Bộ dữ liệu được lấy từ link: https://www.kaggle.com/datasets/andrewmvd/car-plate-detection gồm 443 ảnh biển số xe ô tô
-Video test được quay bằng điện thoại với định dạng .mp4
+	- Bộ dữ liệu được lấy từ link: https://www.kaggle.com/datasets/andrewmvd/car-plate-detection gồm 443 ảnh biển số xe ô tô
+	- Video test được quay bằng điện thoại với định dạng .mp4
 
 # 4. Giới thiệu YOLOv8
 ## Giải thích cách YOLO hoạt động và các thông số quan trọng cần chú ý
@@ -61,11 +61,22 @@ YOLOv8 đi kèm với các mô hình được đào tạo trước sau đây:
 
 - Cài đặt YOLOv8
   + Cài trực tiếp
-  + Cài bằng docker 
-
-
-
-
+```
+pip install ultralytics
+```
+  + Cài bằng docker : tải yolov8 docker image từ docker hub
+  - dành cho máy có GPU:
+  ```
+  docker pull ultralytics/ultralytics:latest
+  ```
+  - Dành cho máy không có GPU:
+  ```
+  docker pull ultralytics/ultralytics:latest-cpu
+  ```
+  - Dành cho máy có chip ARM như MacOS, Jetson Nano, Raspberry Pi,...
+  ```
+  docker pull ultralytics/ultralytics:latest-arm64
+  ```
 
 # 5. Nhận diện biển số xe
 - chuẩn hóa dữ liệu
