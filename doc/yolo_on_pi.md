@@ -95,11 +95,14 @@ mkdir -p datasets/val/labels
 mkdir -p datasets/val/images
 
 # copy image
-cp ./archive/images datasets/train/images
-cp ./archive/images/Cars1*.png datasets/train/images
+cp -r ./archive/images datasets/train
+cp -r ./archive/images/Cars1*.png datasets/val/images
 
-#copy anotation
-cp ./dataset/train/labels/Cars1*.txt datasets/val/labels
+# run file convert.py
+python3 convert.py
+
+# copy anotation
+cp -r ./datasets/train/labels/Cars1*.txt datasets/val/labels
 ```
 - tạo file .yaml
 ```
@@ -115,7 +118,7 @@ names:
 ```
 - Train model
 ```
-yolo train model=yolov8n.pt data=datasets/alpr.yaml epochs=3 imgsz=640
+yolo train model=yolov8n.pt data=datasets/alpr.yaml epochs=1 imgsz=640
 ```
 - test video tại PC 
 ```
