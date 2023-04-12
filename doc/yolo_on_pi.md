@@ -117,9 +117,12 @@ names:
 ```
 yolo train model=yolov8n.pt data=datasets/alpr.yaml epochs=3 imgsz=640
 ```
-- test trên video tại PC 
+- test video tại PC 
+```
+yolo predict model=best_100.pt source=test_video/test_1.mp4
+```
 - copy model vào pi
-- test trên video tại Pi 
+- test video tại Pi 
 - Tính FPS
 Speed: 0.7ms preprocess, 41.9ms inference, 0.5ms postprocess per image at shape (1, 3, 640, 640)
 Đây là thông số về tốc độ xử lý của mô hình máy học khi thực hiện dự đoán trên ảnh có kích thước (1, 3, 640, 640), trong đó:
