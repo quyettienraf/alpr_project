@@ -110,8 +110,9 @@ names:
   0: plate
 ```
 - Train model
-
-
+```
+yolo train model=yolov8n.pt data=datasets/alpr.yaml epochs=3 imgsz=640
+```
 - test trên video tại PC 
 - copy model vào pi
 - test trên video tại Pi 
