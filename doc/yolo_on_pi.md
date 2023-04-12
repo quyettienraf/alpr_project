@@ -83,6 +83,10 @@ pip install ultralytics
   ```
 
 # 5. Nhận diện biển số xe
+- Run docker image
+```
+docker run --name alpr -p 5000:5000 -it -v ${PWD}:/home/data_docker ultralytics/ultralytics:latest-cpu /bin/bash
+```
 - chuẩn hóa dữ liệu
 ```
 mkdir -p datasets/train/labels
@@ -108,10 +112,6 @@ test:  # test images (optional)
 # Classes
 names:
   0: plate
-```
-- Run docker image
-```
-docker run --name alpr -p 5000:5000 -it -v ${PWD}:/home/data_docker ultralytics/ultralytics:latest-cpu /bin/bash
 ```
 - Train model
 ```
