@@ -109,6 +109,10 @@ test:  # test images (optional)
 names:
   0: plate
 ```
+- Run docker image
+```
+docker run --name alpr -p 5000:5000 -it -v ${PWD}:/home/data_docker ultralytics/ultralytics:latest-cpu /bin/bash
+```
 - Train model
 ```
 yolo train model=yolov8n.pt data=datasets/alpr.yaml epochs=3 imgsz=640
