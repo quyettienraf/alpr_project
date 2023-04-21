@@ -4,6 +4,9 @@
 
 # Yêu cầu
 - sơ đồ khối mô tả tổng quan
+- [x]  bước 1: xác định vùng biển số boudingbox
+- [x]  bước 2: nhận dạng vùng kí tự trong biển số
+- [x]  bước 3: nhận dạng kí tự trong vùng kí tự
 - lựa chọn thuật toán ở mỗi bước
 - implement trên thiết bị raspberry pi
 - Tối ưu, cải tiến thuật toán
@@ -22,3 +25,16 @@
 - so sánh cùng ngữ cảnh các phương pháp
 
 # Mục lục
+- Chương 1: Tổng quan về nhận dạng
+- Chương 2: Xử lý ảnh và OpenCV
+- Chương 3: Tổng quan về hệ thống nhúng
+- Chương 4: Bài toán nhận dạng biển số xe
+- Chương 5: Kết quả và hướng phát triển
+- Kết luận
+- Tài liệu tham khảo
+- Phụ lục
+- Danh mục các hình vẽ
+- Danh mục các bảng
+
+# Mở đầu
+Xử lý và nhận dạng ảnh là một lĩnh vực từ lâu được nhiều người quan tâm. 
