@@ -98,7 +98,7 @@ Phương pháp này có tính tổng quát tương đối cao và có thể áp 
 
 ![The-architecture-of-a-convolutional-recurrent-neural-network-is-composed-of-three](https://user-images.githubusercontent.com/13607004/233864826-a9ea8983-e7f7-43a9-b9d3-250c58df1c4a.png)
 
-<i> Mạng CRNN <i>
+<i> Mạng CRNN </i>
             
 ## 2.3 Mô hình kết hợp phát hiện và nhận diện biển số xe
 ### 2.3.1. Hướng tuần tự
