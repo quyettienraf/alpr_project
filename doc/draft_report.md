@@ -50,6 +50,7 @@ Nghiên cứu này tập trung vào việc đánh giá và cải thiện phươn
 Hy vọng rằng nghiên cứu này sẽ cung cấp một đóng góp quan trọng trong việc phát triển các phương pháp nhận dạng biển số xe tự động hiệu quả và tối ưu hơn trong tương lai, từ đó giúp cho việc ứng dụng công nghệ xử lý ảnh vào các lĩnh vực như an ninh giao thông, giám sát, quản lý bãi đỗ xe trở nên dễ dàng và chính xác hơn.
 
 # Chương 1: Giới thiệu đề tài
+## 1.1. Lý do chọn đề tài
 Lĩnh vực xử lý ảnh số, bao gồm xử lý, phân tích và nhận biết tự động bằng máy tính, đã và đang có sự phát triển mạnh mẽ trong cả lý thuyết và các ứng dụng thực tế. Xử lý ảnh được ứng dụng trong nhiều lĩnh vực quan trọng như: viễn thông, truyền thông, chụp ảnh y tế, sinh học, khoa học vật liệu, robot, sản xuất, các hệ thống cảm biến thông minh, tự động điều khiển, đồ họa, in ấn, ... Sự phát triển mạnh mẽ này có thể được thấy rõ qua số lượng các bài báo, báo cáo khoa học về xử lý ảnh hàng năm cũng như số lượng các đầu sách viết về xử lý ảnh số.
 
 Như chúng ta đã biết, ngày nay xe máy và ô tô là phương tiện giao thông chính và số lượng ngày càng tăng. Vì vậy vấn đề quản lý giao thông, đảm bảo an ninh, thu phí gioa thông, trông bãi giữ xe,... đòi hỏi và cần thiết có sự hỗ trợ của khoa học kĩ thuật. Một trong những sự hỗ trợ đầy hiệu quả đó là làm sao giúp những ngừoi quản lý nhận dạng biển số xe một cách dễ dàng, nhanh chóng và thuận lợi nhất.
@@ -59,6 +60,23 @@ Nhận dạng biển số xe trở thành một ứng dụng hữu ích, đượ
 Trong lĩnh vực nhận dạng biển số xe, hệ thống nhúng đang được ưu tiên lựa chọn vì tính đơn giản, hiệu quả và tiết kiệm chi phí. Hệ thống nhúng được thiết kế để chạy các tác vụ như tính toán, điều khiển, với đặc tính tiêu thụ điện năng thấp và kích thước nhỏ gọn. Do đó, việc sử dụng hệ thống nhúng trong ứng dụng nhận dạng biển số xe tự động có thể giúp tối ưu hóa quá trình xử lý và giảm thiểu tài nguyên phần cứng cần thiết, đồng thời tăng tốc độ xử lý và cải thiện độ chính xác của hệ thống.
 
 Từ những lý do trên, em quyết định lựa chọn đề tài "Nghiên cứu đánh giá tối ưu phương pháp nhận dạng biển số xe tự động trên hệ thống nhúng". Việc nghiên cứu này sẽ đóng góp tích cực vào việc giải quyết các vấn đề liên quan đến quản lý giao thông và đảm bảo an ninh giao thông, đồng thời là một ứng dụng tiềm năng của công nghệ nhúng trong lĩnh vực xử lý ảnh số.
+
+## 1.2. Lịch sử nghiên cứu
+Các phương pháp xử lý ảnh bắt đầu từ các ứng dụng chính: nâng cao chất lượng ảnh và phân tích ảnh. Ứng dụng đầu tiên được biết đến là nâng cao chất lượng ảnh báo được truyền qua cáp từ London đến New York từ những năm 1920. Vấn đề nâng cao chất lượng ảnh có liên quan tới phân bổ mức sáng và độ phân giải của ảnh. Việc nâng cao chất lượng ảnh được phát triển vào những năm 1955. Điều này có thể giải thích được vì sau thế chiến thứ hai, máy tính phát triển nhanh tạo điều kiện cho quá trình xử lý ảnh số thuận lợi. Năm 1964, máy tính đã có khả năng xử lý và nâng cao chất lượng ảnh từ mặt trăng và vệ tính Ranger của Mĩ. Từ năm 1964 đến nay, các phương tiện xử lý, nâng cao chất lượng, nhận dạng ảnh phát triển không ngừng. Các phương pháp tri thức nhân tạo như mạng neural nhân tạo, các thuật toán xử lý ảnh hiện đại, các công cụ nén ảnh ngày càng được áp dụng rộng rãi và thu được nhiều kết quả khả quan.
+
+Để dễ tưởng tượng, chúng ta xét các bước cần thiết trong xử lý ảnh. Đầu tiên, ảnh tự nhiên từ thế giới bên ngoài được thu thập qua các thiết bị thu như camera, máy ảnh. Trước đây, các thu qua camera là các ảnh tương tự (lạoi camera ống kiểu CCIR). Gần đây, với sự phát triển của công nghệ, ảnh được chụp từ camera, sau đó được chuyển trực tiếp thành ảnh số tạo thuận lợi cho các bước xử lý tiếp theo. Ngoài ra, ảnh cũng có thể được chụp từ vệ tinh hoặc có thể quét từ máy scan ảnh.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
