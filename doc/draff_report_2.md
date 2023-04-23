@@ -70,3 +70,66 @@ Nhược điểm:
 - Có thể gặp khó khăn khi phát hiện các đối tượng nhỏ, che khuất hoặc có hình dạng không đều.
 - Có thể bị ảnh hưởng bởi các yếu tố ngoại cảnh như ánh sáng, nhiễu hoặc chuyển động.
             
+## 2.2. Nhận diện biển số xe
+### 2.2.1. Phương pháp so trùng mẫu (Template matching)
+Phương pháp so trùng mẫu được sử dụng để phân loại các đối tượng dựa trên sự tương tự giữa chúng và một mẫu được cho trước. Trong bài toán nhận diện biển số xe, mẫu được sử dụng là một tập hợp các ký tự. Phương pháp này thường được áp dụng trên ảnh xám hoặc ảnh nhị phân.
+
+Các độ đo khoảng cách như khoảng cách Mahalanobis, khoảng cách Jaccard và khoảng cách Hamming được sử dụng để so sánh các đối tượng với mẫu. Độ chính xác của phương pháp này phụ thuộc vào độ tương đồng giữa đối tượng và mẫu.
+
+Mặc dù phương pháp so trùng mẫu đơn giản và dễ thực hiện, nhưng nó cũng có những hạn chế. Trong thực tế, kích thước của các ký tự phải cố định để áp dụng phương pháp này. Ngoài ra, phương pháp này cũng rất nhạy cảm với nhiễu, sự thay đổi mức sáng và góc quay của đối tượng. Vì vậy, việc áp dụng phương pháp này trong các bài toán thực tế có thể gặp khó khăn.
+
+### 2.2.2 Phương pháp học sâu
+Các phương pháp nhận diện biển số xe thường hoạt động trên tập dữ liệu là hình ảnh biển số xe đã được cắt sẵn. Tập dữ liệu này chỉ chứa thông tin về chuỗi ký tự trên biển số xe mà không có thông tin về vị trí của từng ký tự trong hình. Ngoài ra, các chuỗi ký tự này thường chỉ nằm trên một hàng.
+
+Mạng ConvNet-RNN [4]:
+Phương pháp nhận diện biển số xe sử dụng kiến trúc mạng gồm lớp mạng VGG [14] và lớp mạng RNN. Đầu tiên, ảnh đầu vào được đưa qua lớp mạng VGG [14] để trích xuất đặc trưng. Sau đó, các đặc trưng được chuyển thành các vector và đưa vào lớp RNN để nhận dạng các ký tự tương ứng.
+
+Phương pháp này có hiệu quả tốt hơn so với phương pháp cửa sổ trượt và không yêu cầu phân đoạn dữ liệu huấn luyện trước. Tuy nhiên, phương pháp này có hạn chế là tỷ lệ nhận dạng sai khá cao cho các cặp ký tự M và N, D và Q, T và Y, C và G.
+
+<img width="380" alt="Screenshot 2023-04-24 at 03 39 29" src="https://user-images.githubusercontent.com/13607004/233865146-e28a45ac-c64d-414f-b56e-388bc5c092e5.png">
+
+
+<i> Mạng ConvNet-RNN </i>
+
+Mạng CRNN [1]:
+Phương pháp này sử dụng hai lớp mạng chính: một lớp mạng neural network tích chập (CNN) để trích xuất đặc trưng và một lớp mạng Long-Short Term Memory (LSTM) cho việc nhận dạng các ký tự. Lớp mạng LSTM được thiết kế để chạy độc lập theo hai chiều (gọi là Bidirectional LSTM hoặc BiLSTM). Đầu vào cho lớp BiLSTM là bản đồ đặc trưng được biến đổi từ đầu ra của lớp CNN. Cuối cùng, lớp BiLSTM được kết nối với hàm lỗi Connectionist Temporal Classification (CTC), cho phép chuyển đổi các vector đặc trưng thành chuỗi các xác suất và tìm ra được chuỗi có tổng xác suất là lớn nhất. Hàm lỗi CTC được sử dụng thay cho giải thuật Hidden Markov Model (HMM), và được cho là hiệu quả hơn HMM hoặc HMM kết hợp học sâu.
+
+Phương pháp này có tính tổng quát tương đối cao và có thể áp dụng cho các văn bản ngoại cảnh, bản nhạc và các tập dữ liệu khác. Nó chỉ sử dụng tập dữ liệu sinh tự động để huấn luyện nhưng vẫn đạt được kết quả tốt trên các tập dữ liệu thực khác. Tuy nhiên, nhược điểm của phương pháp này là chỉ có thể nhận dạng được chuỗi dữ liệu trên cùng một hàng.
+
+![The-architecture-of-a-convolutional-recurrent-neural-network-is-composed-of-three](https://user-images.githubusercontent.com/13607004/233864826-a9ea8983-e7f7-43a9-b9d3-250c58df1c4a.png)
+
+<i> Mạng CRNN <i>
+            
+## 2.3 Mô hình kết hợp phát hiện và nhận diện biển số xe
+### 2.3.1. Hướng tuần tự
+Hướng tuần tự là một phương pháp trong việc xử lý ảnh mà có sự tách biệt giữa quá trình phát hiện và quá trình nhận diện. Trong đó quá trình phát hiện và quá trình nhận diện được thực hiện riêng biệt, nhưng có thể có sự tương tác giữa chúng.
+Phương pháp của Masood và đồng sự [17]:
+Phương pháp này sử dụng 3 mạng neural convolutional (CNN) để thực hiện quá trình phát hiện và nhận dạng biển số xe. Mạng đầu tiên được sử dụng để phát hiện và phân loại biển số xe, mạng thứ hai được sử dụng để phát hiện các ký tự trên biển số, và mạng cuối cùng được sử dụng để nhận dạng các ký tự đó. Phương pháp này đã đạt được độ chính xác khá cao trên các tập dữ liệu biển số xe của Mỹ và châu Âu, lần lượt là 93,44% và 94,55%. Tuy nhiên, mô hình mà phương pháp này đề xuất khá lớn với 3 mạng neural tách biệt, dẫn đến thời gian huấn luyện sẽ tốn nhiều thời gian.
+            
+Phương pháp của Li Hui và đồng sự [18]:
+Phương pháp này áp dụng một mạng phân loại CNN để tạo ra bản đồ xác suất của các pixel có khả năng là ký tự trong biển số xe. Bản đồ xác suất này sau đó được gom nhóm lại bằng giải thuật Non-Maxima Suppression (NMS) và Run-Length Smoothing Algorithm (RLSA) để tạo ra các nhóm pixel liên quan đến các ký tự trong biển số xe. Từ các nhóm pixel này, đường bao của biển số xe được tạo ra thông qua giải thuật phân tích các thành phần liên kết (CCA). Sau đó, vùng biển số được trích xuất từ các nhóm pixel này và đưa qua mô hình tương tự như phương pháp [1] để nhận diện chuỗi biển số xe.
+Ưu điểm của phương pháp này là đạt được độ chính xác khá cao so với các phương pháp trước đó với tỷ lệ 97.56%. Tuy nhiên, bước trích xuất biển số xe vẫn phải được thực hiện bằng cách thủ công, do đó có thể dẫn đến sai sót và ảnh hưởng đến độ chính xác của bước nhận dạng phía sau.
+            
+### 2.3.2 Hướng tích hợp
+Hướng tích hợp là hướng tiếp cận trong xử lý ảnh mà việc phát hiện và nhận diện đối tượng được kết hợp lại để cùng hoạt động trên cùng một mạng. Trong hướng này, thông tin giữa quá trình phát hiện và nhận diện được chia sẻ thông qua bộ phân loại trung gian, giúp cải thiện độ chính xác và tốc độ xử lý.
+
+Một số phương pháp tích hợp sử dụng bước tiền xử lý để xác định vùng quan tâm (ROI - Region of Interest) trước khi thực hiện phát hiện và nhận diện. Quá trình này giúp tập trung phân tích vào vùng quan tâm để tăng tốc độ xử lý và giảm độ phức tạp của mô hình. Tuy nhiên, việc xác định ROI đòi hỏi kiến thức chuyên môn và kinh nghiệm để đảm bảo độ chính xác và tránh sai sót trong quá trình xử lý.
+            
+Phương pháp của Li Hui và đồng sự [5]:
+Phương pháp này sử dụng kiến trúc mạng duy nhất bao gồm các phần: lớp mạng trích xuất đặc trưng cấp thấp, tạo vùng chứa biển số, xử lý vùng chứa biển số, phát hiện và nhận dạng biển số xe. Phương pháp này lấy ý tưởng kết hợp các mạng có sẵn thành một mạng duy nhất để giảm thiểu các bước trung gian, đặc biệt là bước phân đoạn ký tự. Nó hoạt động tốt trong các điều kiện tự nhiên như ban ngày, ban đêm, mưa và nắng.
+
+Tuy nhiên, quá trình nhận dạng ký tự chỉ hoạt động với chuỗi ký tự trên một hàng. Chiến thuật huấn luyện tương đối phức tạp và yêu cầu một lượng lớn dữ liệu. Do đó, phương pháp này đòi hỏi sự đầu tư nghiêm túc và chú ý đến các thách thức về tính toàn vẹn và độ chính xác của dữ liệu.
+
+<img width="801" alt="Screenshot 2023-04-24 at 03 51 09" src="https://user-images.githubusercontent.com/13607004/233865626-c10dc87a-21f5-40ba-a4ed-b276158442ae.png">
+            
+<i> Kiến trúc tổng quan của mô hình [5] </i>            
+         
+            
+            
+            
+            
+            
+            
+            
+            
+            
