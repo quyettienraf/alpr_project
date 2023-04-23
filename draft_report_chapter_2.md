@@ -6,6 +6,7 @@ Kỹ thuật xử lý ảnh hiện nay đã được ứng dụng rộng rãi tr
 Một hệ thống xử lý ảnh cơ bản bao gồm các chức năng như thu thập và tiền xử lý dữ liệu đầu vào, thực hiện các phép xử lý như lọc, biến đổi, phân tích và đưa ra kết quả cuối cùng. Các hệ thống xử lý ảnh còn được sử dụng để nhận dạng, phân loại và đưa ra quyết định trên thực tế. Trong phạm vi đồ án, tác giả giới hạn trong việc giới thiệu một hệ thống xử lý ảnh ứng dụng nhận dạng và ra quyết định trên thực tế, đó là hệ thống nhận dạng biển số xe.
 
 <img width="526" alt="Screenshot 2023-04-23 at 14 33 32" src="https://user-images.githubusercontent.com/13607004/233826376-3613f5eb-3b4c-4ae3-aa22-9df1a85560dc.png">
+
 <i>Sơ đồ tổng quát một hệ thống xử lý ảnh</i>
 
 Hệ thống xử lý ảnh được giới thiệu trong đồ án bao gồm 3 khối chức năng cơ bản: khối thu nhận ảnh, khối phân tích ảnh và khối nhận dạng. 
@@ -16,11 +17,21 @@ Hệ thống xử lý ảnh được giới thiệu trong đồ án bao gồm 3 
 ### 2.1.1. Một số khái niệm và các vấn đề cơ bản trong xử lý ảnh
 #### 2.1.1.1. Một số khái niệm cơ bản: 
 <b> a, Phần tử ảnh (Pixel - Picture Element)</b>
-Ảnh trong thực tế là một ảnh liên tục về không gian và giá trị độ sáng. Dể có thể xử lý ảnh bằng máy tính cần thiết phải số hóa ảnh. Trong quá trình số hóa, người ta biến đổi tín hiệu liên tục sang tín hiệu rời rạc thông qua quá trình lấy mẫu (rời rạc hóa về không gian) và lượng hóa thành phần giá trị. Trong quá trình này người ta sử dụng khái niệm Pixel để biểu diễn các phần tử của bức ảnh. Ở đây cũng cần phân biệt khái niệm pixel hay đề cập đến trong các hệ thống đồ họa máy tính. Để tránh nhầm lẫn ta tạm thời gọi khái niệm pixel này là pixel thiết bị.
+Trong thực tế, ảnh là một tín hiệu liên tục về không gian và giá trị độ sáng, để có thể xử lý ảnh bằng máy tính, ta cần số hóa ảnh thông qua quá trình lấy mẫu và lượng hóa thành phần giá trị. Trong quá trình này, ta sử dụng khái niệm Pixel để biểu diễn các phần tử của bức ảnh. Tuy nhiên, để tránh nhầm lẫn, ta cần phân biệt khái niệm pixel trong thực tế và pixel trong các hệ thống đồ họa máy tính.
 
-Khái niệm pixel thiết bị có thể xem xét như sau: Khi ta quan sát màn hình (trong chế độ đồ họa), màn hình không liên tục mà gồm nhiều điểm nhỏ, gọi là pixel. Mỗi pixel bao gồm một cặp tọa độ x,y và màu. Cặp tọa đọ x, y tạo nên độ phân giải (resolution). Như màn hình máy tính có nhiều độ phân giải khác nhau, hiện tại phổ biến là màn hình HD (High Definition) có độ phân giải là 1280 x 720 pixels hay màn hình Full HD (Full High Definition) có độ phân giải là 1920 x 1080.
+Khái niệm pixel trong đồ họa máy tính được hiểu như sau: khi ta quan sát màn hình trong chế độ đồ họa, màn hình không hiển thị ảnh liên tục mà được tạo thành bởi nhiều điểm nhỏ gọi là pixel. Mỗi pixel chứa một cặp tọa độ x và y cùng với thông tin về màu sắc. Cặp tọa độ x, y tạo nên độ phân giải của màn hình. Hiện nay, màn hình máy tính có nhiều độ phân giải khác nhau, phổ biến nhất là màn hình HD (High Definition) có độ phân giải 1280 x 720 pixel và màn hình Full HD (Full High Definition) có độ phân giải 1920 x 1080 pixel.
 
 ![so-sanh-do-phan-giai-hd-va-full-hd-2](https://user-images.githubusercontent.com/13607004/233827520-f0cf4a59-c037-4cc7-b574-225dd6b2a693.jpg)
+
 <i> Hình ảnh thể hiện một điểm ảnh </i>
+
+<b> b, Ảnh màu (Color image) </b>
+Ảnh màu chứa thông tin màu cho mỗi phần tử của ảnh. Thông thường giá trị màu này dựa trên các không gian màu (color space) trong đó không gian màu thường được sử dụng là RGB tương ứng với 3 kênh màu đỏ (Red) - xanh lá cây (Green) -  xanh da trời (Blue). Tùy thuộc vào số bit được sử dụng để lưu trữ màu ta có số lượng màu khác nhau, ví dụ 8 bit, 16 bit, 24 bit (True Color). Nếu ta sử dụng nhỏ hơn 24 bit để lưu trữ màu thì ta phải so 1 bảng Palette màu, nó tương tự như một bảng Lookup Table cho phép ánh xạ giữa một vị trí trong bảng với một tổ hợp của không gian màu RGB. Ví dụ như sử dụng 8 bit tương ứng với 256 màu thì ta phải có bảng ánh xạ 256 màu đó tương ứng với 256 tổ hợp Red - Green - Blue.
+
+![The_three_primary_colors_of_RGB_Color_Model_(Red,_Green,_Blue)](https://user-images.githubusercontent.com/13607004/233828067-cc5fee54-5f5e-4411-ab34-f898cedb6990.png)
+
+<i> Ảnh màu RGB</i>
+
+
 
 
