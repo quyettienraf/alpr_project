@@ -21,22 +21,30 @@ Vấn đề nhận diện biển số xe là một trong những hướng nghiê
 
   - Việc huấn luyện mạng cũng tốn nhiều thời gian, đặc biệt là với các mạng lớn và phức tạp. Hơn nữa, để tìm được bộ siêu tham số phù hợp với kiến trúc mạng, ta phải thực hiện việc huấn luyện lại mạng với mỗi một tham số truyền vào.
   
-Dựa vào khảo sát của các đề tài hiện nay về nhận diện biển số xe, có thể nhận thấy rằng vẫn còn một số vấn đề đáng chú ý. Một trong những giới hạn của các phương pháp nhận diện ký tự ứng dụng học sâu là khả năng phát hiện các ký tự có góc xoay bất kỳ. Đa phần các phương pháp hiện tại chỉ đạt được hiệu quả tối ưu với các góc xoay không quá lớn.
+Dựa vào khảo sát của các đề tài hiện nay về nhận diện biển số xe, có thể nhận thấy rằng vẫn còn một số vấn đề đáng chú ý. 
 
-Hơn nữa, đa phần các phương pháp sử dụng học sâu vẫn chưa được chứng minh là có thể áp dụng với biển số xe ở Việt Nam. Các dạng biển số xe mà các phương pháp hiện tại có thể nhận diện đều có kích thước tương đối đồng nhất và cách bố trí các ký tự không quá phức tạp, khác với biển số xe ở Việt Nam có độ phức tạp cao hơn và có nhiều dạng biển số khác nhau.
+- Một trong những giới hạn của các phương pháp nhận diện ký tự ứng dụng học sâu là khả năng phát hiện các ký tự có góc xoay bất kỳ. Đa phần các phương pháp hiện tại chỉ đạt được hiệu quả tối ưu với các góc xoay không quá lớn.
 
-Cuối cùng, tốc độ xử lý của các giải thuật hiện nay vẫn chưa đạt đến thời gian thực, tức là việc xử lý và nhận diện biển số xe vẫn tốn nhiều thời gian.
+- Hơn nữa, đa phần các phương pháp sử dụng học sâu vẫn chưa được chứng minh là có thể áp dụng với biển số xe ở Việt Nam. Các dạng biển số xe mà các phương pháp hiện tại có thể nhận diện đều có kích thước tương đối đồng nhất và cách bố trí các ký tự không quá phức tạp, khác với biển số xe ở Việt Nam có độ phức tạp cao hơn và có nhiều dạng biển số khác nhau.
+
+- Cuối cùng, tốc độ xử lý của các giải thuật hiện nay vẫn chưa đạt đến thời gian thực, tức là việc xử lý và nhận diện biển số xe vẫn tốn nhiều thời gian.
 
 Trước những khó khăn nêu trên, cần có sự cải tiến và kết hợp các phương pháp hiện tại để tạo ra một phương pháp nhận diện biển số xe hiệu quả, có thể giải quyết các vấn đề đang tồn tại. Đồng thời, đề tài cũng mong muốn có thể giải quyết được các vấn đề còn tồn tại của các đề tài đi trước đó.
 
+Trong bài toán nhận dạng biển số xe, thời gian phản hồi nhanh và độ chính xác cao là rất quan trọng để đảm bảo an toàn giao thông và quản lý tốt việc điều khiển phương tiện. Sử dụng hệ thống edge computing có thể cải thiện các yếu tố này bởi vì nó cho phép xử lý dữ liệu cục bộ tại nguồn phát sinh mà không phải truyền dữ liệu tới một trung tâm xử lý tập trung (centralized processing center) ở xa. Kết quả là giảm thiểu độ trễ và tăng tốc độ xử lý, đồng thời giảm tải băng thông mạng và chi phí lưu trữ dữ liệu. Hơn nữa, hệ thống edge computing có thể hoạt động độc lập và đảm bảo tính sẵn sàng cao, ngay cả khi kết nối mạng bị gián đoạn hoặc mất mát. Từ đó, việc áp dụng hệ thống edge computing vào bài toán nhận dạng biển số xe sẽ giúp cải thiện hiệu suất và độ tin cậy của hệ thống.
 
 ## 1.2 Mục tiêu của đề tài
 
 Đề tài này tập trung vào việc đánh giá và cải thiện phương pháp nhận dạng biển số xe tự động trên hệ thống nhúng. Bằng việc kết hợp các kỹ thuật xử lý ảnh, mục tiêu là tạo ra một hệ thống nhận dạng biển số xe tự động có độ chính xác cao và tốc độ xử lý nhanh hơn so với các phương pháp khác, đạt độ chính xác trên 90% cho việc phát hiện biển số và trên 80% cho việc nhận diện chuỗi biển số, đồng thời cải thiện thời gian xử lý của mô hình để đảm bảo thực hiện ở thời gian thực. Đề tài này sẽ đưa ra các kết quả thực nghiệm và đánh giá hiệu quả của phương pháp được đề xuất.
   
   
-  
-  
+## 1.3 Ý nghĩa của đề tài
+### 1.3.1 Ý nghĩa thực tiễn
+
+Phương pháp được đề xuất trong đề tài có thể áp dụng trong nhiều ứng dụng, như giám sát giao thông tự động, bãi giữ xe thông minh, trạm thu phí tự động và nhiều ứng dụng khác. Sử dụng phương pháp này có thể giúp giảm thời gian và công sức của con người, đồng thời giảm tình trạng kẹt xe và tăng sự tiện lợi cho người tham gia giao thông. Một trong những yếu tố quan trọng để đạt được hiệu quả cao của phương pháp là xây dựng được tập dữ liệu chính xác, đa dạng và phù hợp với các điều kiện thực tế tại Việt Nam. Các ứng dụng được phát triển từ phương pháp này sẽ mang lại lợi ích cho cả xã hội và góp phần nâng cao chất lượng cuộc sống của người dân.
+
+### 1.3.2 Ý nghĩa khoa học
+Đề tài đóng góp một phương pháp mới trong việc phát hiện và nhận diện biển số xe hiệu quả, với mục tiêu tăng độ chính xác và giải quyết các vấn đề còn tồn tại của các phương pháp đi trước. Nghiên cứu này có thể cung cấp cơ sở cho các nghiên cứu trong nước về sau, đặc biệt là trong lĩnh vực ứng dụng các hệ thống nhúng. Tập dữ liệu chính xác, đa dạng và sát với điều kiện thực tế của nước ta cũng được xem là một đóng góp đáng kể của nghiên cứu này.
   
   
 
