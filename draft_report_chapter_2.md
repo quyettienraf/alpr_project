@@ -26,12 +26,32 @@ Khái niệm pixel trong đồ họa máy tính được hiểu như sau: khi ta
 <i> Hình ảnh thể hiện một điểm ảnh </i>
 
 <b> b, Ảnh màu (Color image) </b>
-Ảnh màu chứa thông tin màu cho mỗi phần tử của ảnh. Thông thường giá trị màu này dựa trên các không gian màu (color space) trong đó không gian màu thường được sử dụng là RGB tương ứng với 3 kênh màu đỏ (Red) - xanh lá cây (Green) -  xanh da trời (Blue). Tùy thuộc vào số bit được sử dụng để lưu trữ màu ta có số lượng màu khác nhau, ví dụ 8 bit, 16 bit, 24 bit (True Color). Nếu ta sử dụng nhỏ hơn 24 bit để lưu trữ màu thì ta phải so 1 bảng Palette màu, nó tương tự như một bảng Lookup Table cho phép ánh xạ giữa một vị trí trong bảng với một tổ hợp của không gian màu RGB. Ví dụ như sử dụng 8 bit tương ứng với 256 màu thì ta phải có bảng ánh xạ 256 màu đó tương ứng với 256 tổ hợp Red - Green - Blue.
+Ảnh màu là một loại ảnh chứa thông tin về màu sắc của mỗi phần tử trong ảnh. Thông thường, giá trị màu được biểu diễn dựa trên các không gian màu (color space), trong đó không gian màu RGB (Red-Green-Blue) là một trong những không gian màu thường được sử dụng. Trong không gian màu RGB, mỗi pixel được biểu diễn bằng ba giá trị màu đỏ, xanh lá cây và xanh da trời. Số bit được sử dụng để lưu trữ màu ảnh phụ thuộc vào số lượng màu sắc khác nhau cần lưu trữ, ví dụ như 8 bit, 16 bit, hoặc 24 bit (True Color). Nếu ta sử dụng số bit nhỏ hơn 24 bit để lưu trữ màu, ta sẽ phải sử dụng bảng Palette màu, tương tự như một bảng Lookup Table. Bảng Palette màu cho phép ánh xạ giữa một vị trí trong bảng với một tổ hợp màu sắc của không gian màu RGB. Ví dụ, nếu ta sử dụng 8 bit tương ứng với 256 màu sắc khác nhau, ta phải có bảng ánh xạ 256 màu sắc đó tương ứng với 256 tổ hợp Red-Green-Blue.
 
 ![The_three_primary_colors_of_RGB_Color_Model_(Red,_Green,_Blue)](https://user-images.githubusercontent.com/13607004/233828067-cc5fee54-5f5e-4411-ab34-f898cedb6990.png)
 
 <i> Ảnh màu RGB</i>
 
+<b> c, Ảnh xám </b>
+Ảnh xám (Gray image) là loại ảnh chỉ bao gồm các mức độ xám khác nhau, mỗi điểm ảnh của ảnh xám chỉ chứa thông tin về mức độ sáng tại vị trí đó. Khác với ảnh màu, ảnh xám không có thông tin về màu sắc, chỉ có thông tin về độ sáng. Trong đó, mỗi điểm ảnh được biểu diễn bằng một giá trị số, thường là giá trị từ 0 đến 255, tương ứng với các mức xám từ đen tuyền đến trắng tuyền. Mỗi giá trị số đại diện cho một mức xám khác nhau, với giá trị 0 thường được dùng để biểu diễn màu đen, và giá trị 255 được dùng để biểu diễn màu trắng.
+<img width="415" alt="Screenshot 2023-04-23 at 17 11 50" src="https://user-images.githubusercontent.com/13607004/233833696-e8ee6020-d809-4ded-b39f-1388d90738a8.png">
 
+<i> Ảnh được chuyển sang ảnh xám </i>
 
+<b> d, Ảnh nhị phân </b>
+Ảnh nhị phân là loại ảnh chỉ bao gồm hai mức xám khác nhau, thường là màu đen và màu trắng. Mỗi điểm ảnh trong bức ảnh nhị phân chỉ có thể có giá trị là 0 hoặc 1, tương ứng với màu đen và màu trắng. Loại ảnh này được sử dụng rất phổ biến trong các ứng dụng xử lý ảnh, như trong nhận dạng ký tự, xử lý ảnh y tế, hoặc xử lý ảnh vệ tinh. Sử dụng ảnh nhị phân giúp giảm thiểu dữ liệu và tăng tốc độ xử lý ảnh, đồng thời cũng giúp đơn giản hóa quá trình xử lý ảnh so với các loại ảnh có nhiều mức xám khác nhau.
+![FlZlGsM](https://user-images.githubusercontent.com/13607004/233833958-9d7c58c2-658a-4722-924f-e8a45bddcbfe.png)
 
+<i> so sánh ảnh màu, ảnh xám và ảnh nhị phân </i>
+
+<b> e, Lược đồ mức xám </b>
+
+Lược đồ mức xám (gray level histogram) là một biểu đồ thống kê tần suất xuất hiện của các mức xám trong một bức ảnh. Nó thể hiện số lần xuất hiện của từng mức xám khác nhau trong ảnh, bao gồm cả số lượng pixel có mức xám tối thiểu và mức xám tối đa.
+
+Lược đồ mức xám được sử dụng rộng rãi trong xử lý ảnh và phân tích hình ảnh. Nó có thể cung cấp thông tin quan trọng về phân bố mức xám trong ảnh, giúp đánh giá chất lượng ảnh, phát hiện và phân tích các đối tượng trong ảnh, thực hiện các phép biến đổi ảnh như cân bằng màu sắc và tăng cường độ tương phản, hay chuyển đổi ảnh từ mức xám sang ảnh màu.
+
+Ví dụ, một ảnh đa mức xám sử dụng 8 bit, có 256 mức xám từ 0 tới 255. Lược đồ mức xám sẽ có trục hoành chạy từ 0 đến 255 và trục tung chính là tổng số điểm ảnh có mức xám tương ứng.
+
+![mage-Histogram-diagram-for-a-digital-gray-scale-image-named-Lena](https://user-images.githubusercontent.com/13607004/233834274-29ea3ea2-ac65-4d25-a2e5-2f02d2777052.png)
+
+<i> Lược đồ mức xám của ảnh xám tương ứng </i> 
