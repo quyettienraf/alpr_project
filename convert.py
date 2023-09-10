@@ -4,11 +4,11 @@ from pathlib import Path
 from xml.dom.minidom import parse
 from shutil import copyfile
 
-FILE_ROOT = "./voc_plate_dataset/"
-IMAGE_PATH = FILE_ROOT + "JPEGImages"  
-ANNOTATIONS_PATH = FILE_ROOT + "Annotations"
+FILE_ROOT = "./datasets/car_license_plate_etection/"
+IMAGE_PATH = FILE_ROOT + "images"  
+ANNOTATIONS_PATH = FILE_ROOT + "annotations"
 
-DATA_ROOT = "dataset_yolo/"
+DATA_ROOT = "datasets/"
 DEST_IMAGES_PATH = "train/images"
 DEST_LABELS_PATH = "train/labels"
 

@@ -24,3 +24,8 @@ docker exec -it "docker_container_name" bash
 ```
 docker exec -it yolov8_ctn bash
 ```
+
+# train 
+yolo train model=yolov8n.pt data=alpr.yaml epochs=10 imgsz=640 batch=2
+
+

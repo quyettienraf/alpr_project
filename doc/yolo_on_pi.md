@@ -108,8 +108,7 @@ cp -r ./datasets/train/labels/Cars1*.txt datasets/val/labels
 ```
 path:  datasets  # dataset root dir
 train: train/images  # train images 
-# val: val/images # val images 
-val:
+val: val/images # val images 
 test:  # test images (optional)
 
 # Classes
