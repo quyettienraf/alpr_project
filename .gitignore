@@ -3,3 +3,5 @@
 .DS_Store
 # ignore ALL .log files
 *.mp4
+*.jpg
+*.png
