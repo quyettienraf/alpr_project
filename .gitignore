@@ -1,7 +1,4 @@
 /datasets
-*.pt
 .DS_Store
 *.mp4
-*.jpg
-*.png
 *.avi
