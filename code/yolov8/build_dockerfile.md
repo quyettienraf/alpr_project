@@ -29,5 +29,5 @@ docker exec -it yolov8_ctn bash
 
 
 # predict
-yolo predict model=yolov8n.pt source=../../test_video/test_1.mp4 save_txt
+yolo predict model=alpr_100.pt source=../../test_video/test_2.mp4 save_txt
 

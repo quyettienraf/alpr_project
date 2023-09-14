@@ -3,7 +3,7 @@ import os
 import pytesseract
 from pytesseract import Output
 
-output_folder = "output_images"  # Update this to your output folder path
+output_folder = "output_images/test_2"  # Update this to your output folder path
 
 for filename in os.listdir(output_folder):
     if filename.endswith(".jpg"):

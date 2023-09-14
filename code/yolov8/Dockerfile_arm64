@@ -18,3 +18,5 @@ WORKDIR /home
 RUN python3 -m pip install --upgrade pip wheel
 RUN pip3 install ultralytics
 
+RUN apt install -y tesseract-ocr
+

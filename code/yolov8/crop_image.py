@@ -1,10 +1,10 @@
 import cv2
 import os
 
-video_name = "test_1"
-video_path = "runs/detect/predict2/test_1.mp4"  # Replace with your video file path
-label_folder = "runs/detect/predict2/labels"  # Replace with the folder path containing the label files
-output_folder = "output_images"  # Replace with the folder where you want to save the cropped images
+video_name = "test_2"
+video_path = "runs/detect/predict3/test_2.mp4"  # Replace with your video file path
+label_folder = "runs/detect/predict3/labels"  # Replace with the folder path containing the label files
+output_folder = "output_images/test_2"  # Replace with the folder where you want to save the cropped images
 
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
