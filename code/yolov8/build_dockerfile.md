@@ -26,8 +26,8 @@ docker exec -it yolov8_ctn bash
 ```
 
 # train 
-
+yolo train model=yolov8n.pt data=alpr.yaml epochs=1 imgsz=640 batch=8
 
 # predict
-yolo predict model=yolov8n.pt source=../../test_video/test_1.mp4 save_txt
+yolo predict model=alpr_yolov8n_8000img_43epoch.pt source=../../test_video/test_1.mp4 save_txt
 
