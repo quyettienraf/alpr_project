@@ -8,3 +8,6 @@ https://learnopencv.com/automatic-license-plate-recognition-using-deep-learning/
 
 # làm giàu dataset
 - https://nttuan8.com/bai-toan-phat-hien-bien-so-xe-may-viet-nam/
+
+# YoloV8
+- https://learnopencv.com/ultralytics-yolov8/
