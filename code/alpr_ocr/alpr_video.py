@@ -120,6 +120,6 @@ def test_vid_yolov8(vid_dir, out_path):
         else:
             break
 
-input_dir = '../../test_video/test_1.mp4'
-out_path = 'results/test_1.avi'
+input_dir = '../../test_video/test_3.mp4'
+out_path = 'results/test_3.avi'
 test_vid_yolov8(input_dir, out_path)
