@@ -7,7 +7,7 @@ from paddleocr import PaddleOCR
 
 ocr = PaddleOCR(lang='en',rec_algorithm='CRNN')
 # Load a model
-model = YOLO("yolov8/alpr_yolov8n_8000img_100epochs.pt") 
+model = YOLO("../yolov8/alpr_yolov8n_8000img_100epochs.pt") 
 
 def perform_ocr(image):
     ocr_res = ocr.ocr(image, cls=False, det=False)
@@ -91,7 +91,7 @@ def perform_ocr(image):
 
 
 # Usage example
-files = glob.glob('./images/images_val/*.jpg', recursive = True)
+files = glob.glob('../../datasets/yolo_plate_dataset/val/images/*.jpg', recursive = True)
 
 x = 0
 y = len(files)
