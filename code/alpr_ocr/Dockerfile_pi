@@ -3,19 +3,24 @@ FROM python:3.10.3-slim-bullseye
 
 # Install Dependencies
 RUN apt-get -y update
-RUN apt-get install -y gcc python3-dev
-RUN apt-get install -y libgl1-mesa-glx libglib2.0-0
+
+# install dependencies
 RUN apt-get install -y cmake wget
 RUN apt-get install -y libatlas-base-dev libopenblas-dev libblas-dev
 RUN apt-get install -y liblapack-dev patchelf gfortran
 RUN pip3 install Cython
 RUN pip3 install -U setuptools
-RUN pip3 install -U protobuf
 RUN pip3 install six requests wheel pyyaml
-RUN wget https://github.com/Qengineering/Paddle-Raspberry-Pi/raw/main/paddlepaddle-2.0.0-cp37-cp37m-linux_aarch64.whl
-RUN pip3 install paddlepaddle-2.0.0-cp37-cp37m-linux_aarch64.whl
+# upgrade version 3.0.0 -> 3.13.0
+RUN pip3 install -U protobuf
+# download the wheel
+RUN wget https://github.com/Qengineering/Paddle-Raspberry-Pi/raw/main/paddlepaddle-2.5.1-cp310-cp310-linux_aarch64.whl
+# install Paddle
+RUN pip3 install paddlepaddle-2.5.1-cp310-cp310-linux_aarch64.whl
+# clean up
+RUN rm paddlepaddle-2.5.1-cp310-cp310-linux_aarch64.whl
 
-RUN pip3 install paddlepaddle
+RUN apt-get install -y libgl1-mesa-glx libglib2.0-0
+# RUN pip3 install paddlepaddle
 RUN pip3 install "paddleocr>=2.0.1"
 RUN pip3 install ultralytics
-
