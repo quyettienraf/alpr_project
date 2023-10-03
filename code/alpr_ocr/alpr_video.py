@@ -61,7 +61,7 @@ def test_vid_yolov8(vid_dir, out_path):
                         aspect_ratio = width / height
                         print("aspect_ratio:", aspect_ratio)
             
-                        if 0 <= aspect_ratio <= 2:
+                        if 0 <= aspect_ratio <= 1.5:
                             # Biển số xe gần vuông hoặc hình vuông
             
                             # Tính toán điểm chia ảnh thành hai phần trên và dưới
@@ -120,6 +120,6 @@ def test_vid_yolov8(vid_dir, out_path):
         else:
             break
 
-input_dir = '../../test_video/test_3.mp4'
-out_path = 'results/test_3.avi'
+input_dir = '../../datasets/test_video/test_7.mp4'
+out_path = 'results/test_7.avi'
 test_vid_yolov8(input_dir, out_path)
