@@ -203,6 +203,6 @@ def test_vid_yolov8(vid_dir, out_path):
         else:
             break
 
-input_dir = '../../datasets/test_video/test_8.mov'
-out_path = 'results/test_8.avi'
+input_dir = '../../datasets/test_video/test_6.mp4'
+out_path = 'results/test_6.avi'
 test_vid_yolov8(input_dir, out_path)
