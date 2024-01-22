@@ -5,6 +5,9 @@ import time
 import numpy as np 
 from paddleocr import PaddleOCR
 
+INPUT_DIR = '../../datasets/test_video/test_6.mp4'
+OUT_PATH = 'results/test_6.avi'
+
 ocr = PaddleOCR(lang='en',rec_algorithm='CRNN')
 # Load a model
 model = YOLO("../yolov8/alpr_yolov8n_8000img_100epochs.pt") 
@@ -14,7 +17,7 @@ def perform_ocr(image):
     ocr_res = ocr.ocr(image, cls=False, det=False)
     return ocr_res
 
-def rotate_and_split_license_plate(image):
+def rotate_and_split_license_plate_Canny(image):
     # Chuyển đổi ảnh sang độ xám để dễ dàng xử lý
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -46,9 +49,9 @@ def rotate_and_split_license_plate(image):
             x0 = a * rho
             y0 = b * rho
             x1 = int(x0 + 1000 * (-b))
-            y1 = int(y0 + 1000 * (a))
+            y1 = int(y0 + 1000 * a)
             x2 = int(x0 - 1000 * (-b))
-            y2 = int(y0 - 1000 * (a))
+            y2 = int(y0 - 1000 * a)
 
             # Tính góc xoay của đoạn thẳng
             angle = np.arctan2(y2 - y1, x2 - x1) * 180 / np.pi
@@ -135,7 +138,7 @@ def test_vid_yolov8(vid_dir, out_path):
                 
                             if 0 <= aspect_ratio <= 1.5:
                                 # Cắt và xoay lại biển số xe --------------
-                                image_upper, image_lower = rotate_and_split_license_plate(
+                                image_upper, image_lower = rotate_and_split_license_plate_Canny(
                                     img[int(y1):int(y2), int(x1):int(x2)])
 
                                 if image_upper is None and image_lower is None:
@@ -203,6 +206,5 @@ def test_vid_yolov8(vid_dir, out_path):
         else:
             break
 
-input_dir = '../../datasets/test_video/test_6.mp4'
-out_path = 'results/test_6.avi'
-test_vid_yolov8(input_dir, out_path)
+
+test_vid_yolov8(INPUT_DIR, OUT_PATH)
