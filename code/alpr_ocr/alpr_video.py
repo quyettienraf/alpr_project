@@ -17,15 +17,15 @@ def perform_ocr(image):
     ocr_res = ocr.ocr(image, cls=False, det=False)
     return ocr_res
 
-def rotate_and_split_license_plate_Canny(image):
+def rotate_and_split_license_plate(image):
     # Chuyển đổi ảnh sang độ xám để dễ dàng xử lý
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Tìm các đường viền trong ảnh
-    edges = cv2.Canny(gray, 50, 150, apertureSize=3) # dùng kernel 3x3 để phát hiện cạnh
+    edges_image = cv2.Canny(gray_image, 100, 200, apertureSize=3, L2gradient=True) # dùng kernel 3x3 để phát hiện cạnh
 
     # Tìm các đoạn thẳng trong ảnh
-    lines = cv2.HoughLines(edges, 1, np.pi / 180, threshold=100)
+    lines = cv2.HoughLines(edges_image, 1, np.pi / 180, threshold=100)
     # np.pi / 180: Giá trị tối thiểu cho góc theta (trong đơn vị radians)
     # threshold=100: Đây là ngưỡng (threshold) cho việc xem xét một đường thẳng.
     # Nếu có nhiều đường thẳng có cùng một góc và tương phản (sự tương quan) cao,
@@ -39,39 +39,45 @@ def rotate_and_split_license_plate_Canny(image):
 
     # Kiểm tra xem lines có giá trị hợp lệ hay không
     if lines is not None:
+        # Lọc và chọn lựa đoạn thẳng phù hợp (đoạn thẳng có độ dài > threshold_length)
+        threshold_length = 150
+        filtered_lines = []
         # Tính toán góc xoay trung bình của các đoạn thẳng
         total_angle = 0
         count = 0
 
         for rho, theta in lines[:, 0]:
-            a = np.cos(theta)
-            b = np.sin(theta)
-            x0 = a * rho
-            y0 = b * rho
-            x1 = int(x0 + 1000 * (-b))
-            y1 = int(y0 + 1000 * a)
-            x2 = int(x0 - 1000 * (-b))
-            y2 = int(y0 - 1000 * a)
+            if np.pi / 4 < theta < 3 * np.pi / 4:
+                a = np.cos(theta)
+                b = np.sin(theta)
+                x0 = a * rho
+                y0 = b * rho
+                x1 = int(x0 + 1000 * (-b))
+                y1 = int(y0 + 1000 * a)
+                x2 = int(x0 - 1000 * (-b))
+                y2 = int(y0 - 1000 * a)
+                line_length = np.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+                if line_length > threshold_length:
+                    filtered_lines.append(((x1, y1), (x2, y2)))
+                
+        if filtered_lines:
+            # Lựa chọn đoạn thẳng dài nhất và thẳng nhất
+            longest_line = max(filtered_lines, key=lambda x: np.linalg.norm(np.array(x[0]) - np.array(x[1])))
+            x1, y1 = longest_line[0]
+            x2, y2 = longest_line[1]
+            # Vẽ đường thẳng dài nhất
+            cv2.line(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
+
+
 
             # Tính góc xoay của đoạn thẳng
-            angle = np.arctan2(y2 - y1, x2 - x1) * 180 / np.pi
+            rotation_angle = (np.arctan2(y2 - y1, x2 - x1) * 180 / np.pi)
 
-            # Loại bỏ các đoạn thẳng gần vuông (có góc nhỏ hơn một ngưỡng)
-            if abs(angle) > 10 and abs(angle) < 80:
-                total_angle += angle
-                count += 1
-
-        # Tính góc xoay trung bình
-        if count > 0:
-            average_angle = total_angle / count
-        else:
-            average_angle = 0
-
-        # Xoay lại ảnh để biển số xe nằm ngang
-        height, width = image.shape[:2]
-        center = (width // 2, height // 2)
-        rotation_matrix = cv2.getRotationMatrix2D(center, average_angle, 1)
-        rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
+            # Xoay lại ảnh để biển số xe nằm ngang
+            height, width = image.shape[:2]
+            center = (width // 2, height // 2)
+            rotation_matrix = cv2.getRotationMatrix2D(center, rotation_angle, 1)
+            rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
 
         # Tính toán điểm chia ảnh thành hai phần trên và dưới
         split_point = height // 2
@@ -80,12 +86,15 @@ def rotate_and_split_license_plate_Canny(image):
         upper_part = rotated_image[:split_point, :]
         lower_part = rotated_image[split_point:, :]
 
-        print("Đã tìm thấy đoạn thẳng.")
-        print("angle:", angle)
-        print("rotate angle:", average_angle)
+        # Điều chỉnh chiều cao của cả hai phần ảnh để chúng có cùng chiều cao
+        upper_part = cv2.resize(upper_part, (int(width), int(height / 2)))
+        lower_part = cv2.resize(lower_part, (int(width), int(height / 2)))
+
+        print("FOUND LINES")
+        print("rotate angle:", rotation_angle)
         return upper_part, lower_part
     else:
-        print("Không tìm thấy đoạn thẳng.")
+        print("NO LINES!")
         return None, None
 
 
@@ -138,8 +147,7 @@ def test_vid_yolov8(vid_dir, out_path):
                 
                             if 0 <= aspect_ratio <= 1.5:
                                 # Cắt và xoay lại biển số xe --------------
-                                image_upper, image_lower = rotate_and_split_license_plate_Canny(
-                                    img[int(y1):int(y2), int(x1):int(x2)])
+                                image_upper, image_lower = rotate_and_split_license_plate(img[int(y1):int(y2), int(x1):int(x2)])
 
                                 if image_upper is None and image_lower is None:
                                     # Biển số xe gần vuông hoặc hình vuông
@@ -161,6 +169,7 @@ def test_vid_yolov8(vid_dir, out_path):
                 
                                 # Tiếp tục xử lý ảnh chữ nhật cr_img ở đây
                                 ocr_res = perform_ocr(image_collage_horizontal)
+                                print('text:', ocr_res)
                 
                                 # Lưu hai phần ảnh
                                 # cv2.imwrite("results/upper_part.jpg", upper_part)
@@ -172,14 +181,18 @@ def test_vid_yolov8(vid_dir, out_path):
                                 image_filename = str(ct) + ".jpg"  # Tên file ảnh đầu ra
                                 cv2.imwrite("results/crop_image/" + image_filename, cr_img)
                                 ocr_res = perform_ocr(cr_img)
+                                print('text:', ocr_res)
+
+                            print('-------------------')
+                            # Draw bounding box and put text
                             recognized_text = ocr_res[0][0][0] if ocr_res else "No Text"
                             print("recognized_text: ",recognized_text)
                             
                             ocr_conf = ocr_res[0][0][1] if ocr_res else "No Conf"
                             ocr_conf = round(ocr_conf,3)
                             print("ocr_conf: ",ocr_conf)
+
                             # Draw on the image
-                            
                             cv2.rectangle(img_tmp, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)  # Red bounding box
                             cv2.putText(img_tmp, recognized_text, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
                             cv2.putText(img_tmp, str(ocr_conf), (int(x1) + 150, int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
