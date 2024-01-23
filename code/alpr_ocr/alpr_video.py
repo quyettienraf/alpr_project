@@ -117,28 +117,22 @@ def test_vid_yolov8(vid_dir, out_path):
     # Reading video frame by frame.
     while(cap.isOpened()):
         ret, img = cap.read()
-        if ret == True:
+        if ret:
             print(str(ct) + "/" + str(total_frames))
 
             # Noting time for calculating FPS.
             prev_time = time.time()
 
             # Use the model
-            results = model(img)  # predict on an image
-            img_tmp = img
+            results = model(img, imgsz=256, conf=0.6)  # predict on an image
             for result in results:
                 if result.boxes is not None and len(result.boxes) > 0:
-                    # Get the bounding boxes and image for each result
-                    bboxes = result.boxes[0].cpu().numpy()
+                    for bbox in result.boxes:
+                        x1, y1, x2, y2 = bbox[0].xyxy[0]
                     # img = cv2.imread(input)  # Đảm bảo bạn đã định nghĩa biến 'input'
             
-                    # Loop through bboxes and apply OCR, then draw on the image
-                    
-                    try:
-                        for bbox in bboxes:
-                            xyxy = bbox.xyxy
-                            x1, y1, x2, y2 = xyxy[0]
-                
+                        # Loop through bboxes and apply OCR, then draw on the image
+                        try:
                             # Kiểm tra xem biển số xe có gần vuông không (ví dụ: tỷ lệ 1:1)
                             width = x2 - x1
                             height = y2 - y1
@@ -193,15 +187,15 @@ def test_vid_yolov8(vid_dir, out_path):
                             print("ocr_conf: ",ocr_conf)
 
                             # Draw on the image
-                            cv2.rectangle(img_tmp, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)  # Red bounding box
-                            cv2.putText(img_tmp, recognized_text, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-                            cv2.putText(img_tmp, str(ocr_conf), (int(x1) + 150, int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+                            cv2.rectangle(img, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)  # Red bounding box
+                            cv2.putText(img, recognized_text, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+                            cv2.putText(img, str(ocr_conf), (int(x1) + 150, int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-                    except Exception as e:
-                        print("----------------------------------------")
-                        print("Error:", e)
-                        print("----------------------------------------")
-                        continue
+                        except Exception as e:
+                            print("----------------------------------------")
+                            print("Error:", e)
+                            print("----------------------------------------")
+                            continue
                 else:
                     # If there are no bounding boxes or the result is empty, skip this result
                     continue
@@ -211,9 +205,9 @@ def test_vid_yolov8(vid_dir, out_path):
             fps = round(1 / tot_time,2)
 
             # Writing information onto the frame and saving it to be processed in a video.
-            cv2.putText(img_tmp, 'frame: %d fps: %s' % (ct, fps),
+            cv2.putText(img, 'frame: %d fps: %s' % (ct, fps),
                         (0, int(100 * 1)), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), thickness=2)
-            out.write(img_tmp)
+            out.write(img)
 
             ct = ct + 1
         else:
