@@ -4,10 +4,10 @@ import os
 import time
 import numpy as np 
 from paddleocr import PaddleOCR
-
-INPUT_DIR = '../../datasets/test_video/test_6.mp4'
-OUT_PATH = 'results/test_6.avi'
-
+INPUT_DIR = '../../datasets/test_video/test_9.mp4'
+OUT_PATH = 'results/test_9.avi'
+IMG_SIZE = 640
+CONF = 0.6
 ocr = PaddleOCR(lang='en',rec_algorithm='CRNN')
 # Load a model
 model = YOLO("../yolov8/alpr_yolov8n_8000img_100epochs.pt") 
@@ -124,7 +124,7 @@ def test_vid_yolov8(vid_dir, out_path):
             prev_time = time.time()
 
             # Use the model
-            results = model(img, imgsz=256, conf=0.6)  # predict on an image
+            results = model(img, imgsz=IMG_SIZE, conf=CONF)  # predict on an image
             for result in results:
                 if result.boxes is not None and len(result.boxes) > 0:
                     for bbox in result.boxes:
