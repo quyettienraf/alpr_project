@@ -4,9 +4,9 @@ import os
 import time
 import numpy as np 
 from paddleocr import PaddleOCR
-INPUT_DIR = '../../test_video/test_1.mp4'
-OUT_PATH = 'results/test_1.avi'
-IMG_SIZE = 640
+INPUT_DIR = '../../datasets/test_video/test_1.mp4' 
+OUT_PATH = './results/test_1_1.avi'
+IMG_SIZE = 256
 CONF = 0.6
 ocr = PaddleOCR(lang='en',rec_algorithm='CRNN')
 # Load a model

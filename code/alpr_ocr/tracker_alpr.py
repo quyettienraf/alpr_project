@@ -14,13 +14,13 @@ import cv2
 # from deep_sort_realtime.deepsort_tracker import DeepSort
 
 
-input_dir = '../../test_video/test_1.mp4'
+input_dir = '../../datasets/test_video/test_6.mp4'
 
-out_path = './results/test_1.avi'
+out_path = './results/test_6_track.avi'
 
 ocr = PaddleOCR(lang='en',rec_algorithm='CRNN')
 # Load a model
-model = YOLO("alpr_yolov8n_8000img_100epochs.pt") 
+model = YOLO("../yolov8/alpr_yolov8n_8000img_100epochs.pt") 
 
 
 def perform_ocr(image):
