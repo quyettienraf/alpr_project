@@ -5,12 +5,12 @@ import time
 import numpy as np 
 from paddleocr import PaddleOCR
 from collections import defaultdict
-from tracker import *
+import tracker
 import datetime
 
-INPUT_DIR = '../test_video/test_1.mp4' 
-OUT_PATH = './results/test_1_1.avi'
-IMG_SIZE = 256
+INPUT_DIR = '../../test_video/test_1.mp4' 
+OUT_PATH = './results/test_1_track_1.avi'
+IMG_SIZE = 480
 CONF = 0.6
 
 ocr = PaddleOCR(lang='en',rec_algorithm='CRNN')
@@ -233,7 +233,7 @@ def get_best_ocr(preds, rec_conf, ocr_res, track_id):
             break
     return preds, rec_conf, ocr_res
 
-def tracker_test_vid_with_deep_sort(INPUT_DIR,OUT_PATH):
+def tracker_video_with_deep_sort(INPUT_DIR,OUT_PATH):
     # Declaring variables for video processing.
     cap = cv2.VideoCapture(INPUT_DIR)
     codec = cv2.VideoWriter_fourcc(*'XVID')
