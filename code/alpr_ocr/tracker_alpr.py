@@ -534,5 +534,5 @@ def tracker_video_with_yolo_track(INPUT_DIR,OUT_PATH):
         else:
             break
 
-tracker_test_vid_with_yolo_track(INPUT_DIR, OUT_PATH)
-# tracker_test_vid_with_deep_sort(INPUT_DIR, OUT_PATH)
+tracker_video_with_yolo_track(INPUT_DIR, OUT_PATH)
+# tracker_video_with_deep_sort(INPUT_DIR, OUT_PATH)
