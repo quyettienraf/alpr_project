@@ -3,7 +3,7 @@ import cv2
 import os
 import time
 import numpy as np 
-from paddleocr import PaddleOCR
+from paddleocr import  
 from collections import defaultdict
 import tracker
 import datetime
