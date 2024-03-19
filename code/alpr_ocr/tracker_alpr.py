@@ -3,25 +3,19 @@ import cv2
 import os
 import time
 import numpy as np 
-from paddleocr import PaddleOCR
+from paddleocr import  
 from collections import defaultdict
-from tracker import *
-
-
+import tracker
 import datetime
-from ultralytics import YOLO
-import cv2
-# from deep_sort_realtime.deepsort_tracker import DeepSort
 
-
-input_dir = '../../test_video/test_1.mp4'
-
-out_path = './results/test_1.avi'
+INPUT_DIR = '../../test_video/test_1.mp4' 
+OUT_PATH = './results/test_1_track_1.avi'
+IMG_SIZE = 480
+CONF = 0.6
 
 ocr = PaddleOCR(lang='en',rec_algorithm='CRNN')
 # Load a model
-model = YOLO("alpr_yolov8n_8000img_100epochs.pt") 
-
+model = YOLO("../yolov8/alpr_yolov8n_8000img_100epochs.pt") 
 
 def perform_ocr(image):
     ocr_res = ocr.ocr(image, cls=False, det=False)
@@ -99,18 +93,16 @@ def rotate_and_split_license_plate(image):
         return None, None
 
 
-def test_vid_yolov8(vid_dir, out_path):
+def test_vid_yolov8(INPUT_DIR, OUT_PATH):
     # Declaring variables for video processing.
-    cap = cv2.VideoCapture(vid_dir)
+    cap = cv2.VideoCapture(INPUT_DIR)
     # Get the total frame count
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     codec = cv2.VideoWriter_fourcc(*'XVID')
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
-    # file_name = os.path.join(out_path, 'out_' + vid_dir.split('/')[-1] + )
-    # out = cv2.VideoWriter(file_name, codec, fps, (width, height))
-    out = cv2.VideoWriter(out_path, codec, fps, (width, height))
+    out = cv2.VideoWriter(OUT_PATH, codec, fps, (width, height))
 
     # Frame count variable.
     ct = 0
@@ -241,15 +233,15 @@ def get_best_ocr(preds, rec_conf, ocr_res, track_id):
             break
     return preds, rec_conf, ocr_res
 
-def tracker_test_vid_with_deep_sort(vid_dir,out_path):
+def tracker_video_with_deep_sort(INPUT_DIR,OUT_PATH):
     # Declaring variables for video processing.
-    cap = cv2.VideoCapture(vid_dir)
+    cap = cv2.VideoCapture(INPUT_DIR)
     codec = cv2.VideoWriter_fourcc(*'XVID')
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
     
-    out = cv2.VideoWriter(out_path, codec, fps, (width, height))
+    out = cv2.VideoWriter(OUT_PATH, codec, fps, (width, height))
 
     tracker = Tracker()
     preds = []
@@ -262,12 +254,12 @@ def tracker_test_vid_with_deep_sort(vid_dir,out_path):
     # Reading video frame by frame.
     while(cap.isOpened()):
         ret, img = cap.read()
-        if ret == True:
-
+        if ret:
             h, w = img.shape[:2]
+            print(ct)
             overlay_img = img.copy()
             prev_time = time.time()
-            detections = model(img)[0]
+            detections = model(img, imgsz=IMG_SIZE, conf=CONF)[0]
             # detections = model.track(img, persist=True)
             
             results = []
@@ -357,7 +349,7 @@ def tracker_test_vid_with_deep_sort(vid_dir,out_path):
                             if track_id not in list(set(ele['track_id'] for ele in preds)):
                                 total_obj = total_obj + 1
                                 preds.append(output_frame)
-                            
+                                # Looking for the current track in the list and updating the highest confidence of it.
                             else:
                                 # Tìm kiếm track hiện tại trong list và update conf cao nhất của nó
                                 preds, rec_conf, ocr_resc = get_best_ocr(preds, ocr_conf, recognized_text, track_id)
@@ -373,10 +365,8 @@ def tracker_test_vid_with_deep_sort(vid_dir,out_path):
                             txt = str(track_id) + ": " + str(ocr_resc) + '-' + str(rec_conf)
                             # txt = str(track_id) + ": "
                             # Vẽ bounding box và track id 
-                            cv2.rectangle(img, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)
-                            cv2.putText(img, txt, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-                                # cv2.putText(img, str(rec_conf), (int(x1) + 150, int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)   
-                                            
+                            cv2.rectangle(overlay_img, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2) # Red bounding box
+                            cv2.putText(overlay_img, txt, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
                     except Exception as e:
                         continue
                 else:
@@ -391,7 +381,7 @@ def tracker_test_vid_with_deep_sort(vid_dir,out_path):
             else:
                 size = 2
             
-            cv2.putText(overlay_img, 'frame: %d fps: %s' % (ct, int(fps)),
+            cv2.putText(overlay_img, 'frame: %d fps: %s' % (ct, round(fps, 2)),
                         (0, int(100 * 1)), cv2.FONT_HERSHEY_SIMPLEX, size, (0, 0, 255), thickness=2)
             out.write(overlay_img)
             # Increasing frame count.
@@ -399,16 +389,15 @@ def tracker_test_vid_with_deep_sort(vid_dir,out_path):
         else:
             break
 
-def tracker_test_vid_with_yolo_track(vid_dir,out_path):
+def tracker_video_with_yolo_track(INPUT_DIR,OUT_PATH):
     # Declaring variables for video processing.
-    cap = cv2.VideoCapture(vid_dir)
+    cap = cv2.VideoCapture(INPUT_DIR)
     codec = cv2.VideoWriter_fourcc(*'XVID')
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
-    #   file_name = os.path.join(out_path, 'out_' + vid_dir.split('/')[-1])
     
-    out = cv2.VideoWriter(out_path, codec, fps, (width, height))
+    out = cv2.VideoWriter(OUT_PATH, codec, fps, (width, height))
 
     # Lưu trữ track
     track_history = defaultdict(lambda: [])
@@ -437,7 +426,7 @@ def tracker_test_vid_with_yolo_track(vid_dir,out_path):
             
             prev_time = time.time()
 
-            results = model.track(img, persist=True)
+            results = model.track(img, imgsz=IMG_SIZE, conf=CONF, persist=True)
             boxes = results[0].boxes.xyxy.cpu()
             boxes_ct = results[0].boxes.xywh.cpu()
             try:
@@ -511,19 +500,22 @@ def tracker_test_vid_with_yolo_track(vid_dir,out_path):
 
                             output_frame = {"track_id": track_id, "ocr_txt": recognized_text, "ocr_conf": ocr_conf}
 
+                            # Thêm track_id vào list, nếu nó không tồn tại trong list.
                             if track_id not in list(set(ele['track_id'] for ele in preds)):
-                                    total_obj = total_obj + 1
-                                    preds.append(output_frame)
+                                total_obj = total_obj + 1
+                                preds.append(output_frame)
                                 # Looking for the current track in the list and updating the highest confidence of it.
                             else:
-                                preds, rec_conf, ocr_resc = get_best_ocr(preds, ocr_conf, recognized_text, track_id) 
+                                # Tìm kiếm track hiện tại trong list và update conf cao nhất của nó
+                                preds, rec_conf, ocr_resc = get_best_ocr(preds, ocr_conf, recognized_text, track_id)
 
                             txt = str(track_id) + ": " + str(ocr_resc) + '-' + str(rec_conf)
-                            cv2.rectangle(overlay_img, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)  # Red bounding box
+                            cv2.rectangle(overlay_img, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2) # Red bounding box
                             cv2.putText(overlay_img, txt, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
                     except Exception as e:
                         continue
                 else:
+                    # If there are no bounding boxes or the result is empty, skip this result
                     continue
             
             tot_time = time.time() - prev_time
@@ -534,7 +526,7 @@ def tracker_test_vid_with_yolo_track(vid_dir,out_path):
             else:
                 size = 2
             
-            cv2.putText(overlay_img, 'frame: %d fps: %s' % (ct, int(fps)),
+            cv2.putText(overlay_img, 'frame: %d fps: %s' % (ct, round(fps, 2)),
                         (0, int(100 * 1)), cv2.FONT_HERSHEY_SIMPLEX, size, (0, 0, 255), thickness=2)
             out.write(overlay_img)
             # Increasing frame count.
@@ -542,6 +534,5 @@ def tracker_test_vid_with_yolo_track(vid_dir,out_path):
         else:
             break
 
-
-tracker_test_vid_with_yolo_track(input_dir, out_path)
-# tracker_test_vid_with_deep_sort(input_dir, out_path)
+tracker_video_with_yolo_track(INPUT_DIR, OUT_PATH)
+# tracker_video_with_deep_sort(INPUT_DIR, OUT_PATH)
