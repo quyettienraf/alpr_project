@@ -13,7 +13,7 @@ OUT_PATH = './results/test_1_track_1.avi'
 IMG_SIZE = 480
 CONF = 0.6
 
-ocr = PaddleOCR(lang='en',rec_ghit algorithm='CRNN')
+ocr = PaddleOCR(lang='en', algorithm='CRNN')
 # Load a model
 model = YOLO("../yolov8/alpr_yolov8n_8000img_100epochs.pt") 
 
